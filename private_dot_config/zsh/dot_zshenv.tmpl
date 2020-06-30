@@ -1,0 +1,36 @@
+# Ensure at least a pseudo-XDG directory structure
+if [[ -z $XDG_RUNTIME_DIR ]]; then
+  export XDG_CONFIG_HOME=$HOME/.config
+  export XDG_CACHE_HOME=$HOME/.cache
+  export XDG_BIN_HOME=$HOME/.local/bin
+  export XDG_LIB_HOME=$HOME/.local/lib
+  export XDG_DATA_HOME=$HOME/.local/share
+  export XDG_RUNTIME_DIR=/dev/shm/xdg-runtime-$(id -u)
+fi
+
+# PATH
+{{ if eq .flavor "wsl" -}}
+export PATH=$(
+  printenv PATH |
+  perl -ne 'print join("\n", split(/:/))' |
+  awk '/\/Docker\/|VS Code/ { print; next } /\/mnt\/[a-z]/ { next } // { print }' |
+  perl -pe 's/\n/:/ unless eof')
+{{ end -}}
+export PATH=$XDG_BIN_HOME:$XDG_DATA_HOME/go/bin:$PATH
+if [[ -d /usr/local/kubebuilder ]]; then export PATH=$PATH:/usr/local/kubebuilder/bin; fi
+
+# Remove duplicates in case env is loaded multiple times
+export PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
+
+# gcloud
+export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/legacy_credentials/bastien.clement@gammadia.ch/adc.json
+
+# go
+export GOPATH=$XDG_DATA_HOME/go
+export GO111MODULE=on
+
+# vim
+export VIMINIT='let $XDGVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $XDGVIMRC'
+
+# zsh
+export HISTFILE=$XDG_DATA_HOME/zsh/history

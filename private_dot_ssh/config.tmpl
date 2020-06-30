@@ -1,0 +1,51 @@
+HashKnownHosts yes
+
+{{ if eq .chezmoi.os "darwin" -}}
+Host *
+  UseKeychain yes
+
+{{ end -}}
+# Gammadia Servers
+Host morkai michel jacquie karl pereblaise
+  User root
+
+Host hedwig archive sites-web jenkins sloth
+  User debian
+
+Host morkai pereblaise sites-web jenkins sloth
+  ForwardAgent yes
+
+Host morkai
+  Hostname morkai.gammadia.net
+
+Host michel
+  Hostname 145.239.245.163
+
+Host jacquie
+  Hostname 145.239.245.162
+
+Host karl
+  Hostname 37.187.30.103
+
+Host pereblaise
+  Hostname 193.247.238.210
+
+Host archive
+  Hostname 167.114.239.227
+
+Host sites-web
+  Hostname 167.114.236.167
+
+Host jenkins
+  Hostname jenkins.gammadia.ch
+
+Host sloth
+  Hostname 167.114.240.87
+
+Host hedwig
+  User admin
+  Hostname 167.114.225.148
+
+Match host *.gammadia.net
+  VerifyHostKeyDNS yes
+  StrictHostKeyChecking yes

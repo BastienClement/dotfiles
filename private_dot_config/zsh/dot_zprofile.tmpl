@@ -1,0 +1,31 @@
+# Create pseudo-XDG runtime dir if non-existant
+if [[ ! -d $XDG_RUNTIME_DIR ]]; then
+  mkdir $XDG_RUNTIME_DIR
+  chown $(id -u):$(id -g) $XDG_RUNTIME_DIR
+  chmod 0700 $XDG_RUNTIME_DIR
+fi
+
+if [[ ! -d $XDG_DATA_HOME/zsh/ ]]; then
+  mkdir -p $XDG_DATA_HOME/zsh;
+fi
+
+if [[ ! -d $XDG_DATA_HOME/vim/undo ]] ||
+   [[ ! -d $XDG_DATA_HOME/vim/swap ]] ||
+   [[ ! -d $XDG_DATA_HOME/vim/backup ]] ||
+   [[ ! -d $XDG_DATA_HOME/vim/view ]]; then
+  mkdir -p $XDG_DATA_HOME/vim/{undo,swap,backup,view}
+fi
+
+{{ if eq .flavor "wsl" -}}
+# Automatically cd to WSL Home if logging in from Windows Home
+if [[ $(pwd -P) =~ '^/mnt/c/Users/[^/]+$' ]]; then cd ~; fi
+
+{{ end -}}
+# Keychain
+if which keychain >/dev/null; then
+  eval `keychain --eval --dir $XDG_RUNTIME_DIR --quiet id_rsa id_ed25519`
+fi
+
+if [[ -z "$TMUX" ]]; then
+  exec tmux
+fi

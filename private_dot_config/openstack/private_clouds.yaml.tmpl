@@ -1,0 +1,11 @@
+clouds:
+  gammadia-ovh:
+{{ with (index (lastpass "Gammadia OVH OpenStack") 0).note }}
+    identity_api_version: 3
+    auth:
+      auth_url: https://auth.cloud.ovh.net/v3/
+      username: {{ .username | trim }}
+      password: {{ .password | trim }}
+      project_id: {{ .tenantId | trim }}
+      project_name: {{ .tenantName | trim }}
+{{ end }}

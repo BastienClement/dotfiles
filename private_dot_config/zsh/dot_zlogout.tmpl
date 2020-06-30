@@ -1,0 +1,4 @@
+{{ if eq .flavor "wsl" -}}
+# On shell exit, clear WSL VM caches
+echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
+{{ end -}}
