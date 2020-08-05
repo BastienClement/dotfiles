@@ -6,13 +6,13 @@ Host *
 
 {{ end -}}
 # Gammadia Servers
-Host morkai michel jacquie karl pereblaise
+Host morkai michel jacquie karl pereblaise marc dave
   User root
 
 Host hedwig archive sites-web jenkins sloth
   User debian
 
-Host morkai pereblaise sites-web jenkins sloth
+Host morkai pereblaise sites-web jenkins sloth dave
   ForwardAgent yes
 
 Host morkai
@@ -28,7 +28,13 @@ Host karl
   Hostname 37.187.30.103
 
 Host pereblaise
-  Hostname 193.247.238.210
+  Hostname 192.168.30.10
+
+Host marc
+  Hostname 192.168.30.22
+
+Host dave
+  Hostname 192.168.30.23
 
 Host archive
   Hostname 167.114.239.227
@@ -46,6 +52,6 @@ Host hedwig
   User admin
   Hostname 167.114.225.148
 
-Match host *.gammadia.net
-  VerifyHostKeyDNS yes
-  StrictHostKeyChecking yes
+#Match host *.gammadia.net
+#  VerifyHostKeyDNS yes
+#  StrictHostKeyChecking yes
