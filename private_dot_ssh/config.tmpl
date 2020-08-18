@@ -43,14 +43,20 @@ Host sites-web
   Hostname 167.114.236.167
 
 Host jenkins
-  Hostname jenkins.gammadia.ch
+  User {{ (index (lastpass "Jenkins") 0).note.username | trim }}
+  Hostname {{ (index (lastpass "Jenkins") 0).note.hostname | trim }}
 
 Host sloth
-  Hostname 167.114.240.87
+  User {{ (index (lastpass "Sloth") 0).note.username | trim }}
+  Hostname {{ (index (lastpass "Sloth") 0).note.hostname | trim }}
 
 Host hedwig
-  User admin
-  Hostname 167.114.225.148
+  User {{ (index (lastpass "Hedwig") 0).note.username | trim }}
+  Hostname {{ (index (lastpass "Hedwig") 0).note.hostname | trim }}
+
+Host infomaniak-gammadia
+  User {{ (index (lastpass "Infomaniak Gammadia.ch") 0).note.username | trim }}
+  Hostname {{ (index (lastpass "Infomaniak Gammadia.ch") 0).note.hostname | trim }}
 
 Host pfsense
   User admin
