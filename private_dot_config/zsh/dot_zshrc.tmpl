@@ -89,19 +89,30 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+setopt HIST_IGNORE_SPACE
 export EDITOR=vim
 {{ if index . "x11display" -}}
 export DISPLAY={{ index . "x11display" }}
 
-setopt HIST_IGNORE_SPACE
-
 {{ end -}}
+alias ll="ls -alh --color"
 alias dr="docker run -it --rm"
 alias kr="kubectl run --generator=run-pod/v1 -i --tty --rm"
 alias gs="gsutil"
 
 {{ if eq .chezmoi.osRelease.id "debian" -}}
-alias apt="sudo apt"
+apt() {
+  if [[ $1 = 'up' ]]; then
+    (
+    set -e
+    sudo apt update
+    sudo apt upgrade
+    sudo apt autoremove --purge
+    )
+  else
+    sudo apt $@
+  fi
+}
 
 {{ end -}}
 {{ if eq .flavor "wsl" -}}
