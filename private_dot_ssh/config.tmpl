@@ -6,13 +6,13 @@ Host *
 
 {{ end -}}
 # Gammadia Servers
-Host morkai michel jacquie karl pereblaise marc dave
+Host morkai michel jacquie karl pereblaise marc dave playground
   User root
 
 Host hedwig archive sites-web jenkins sloth
   User debian
 
-Host morkai pereblaise sites-web jenkins sloth dave
+Host morkai pereblaise sites-web jenkins sloth dave playground
   ForwardAgent yes
 
 Host morkai
@@ -35,6 +35,9 @@ Host marc
 
 Host dave
   Hostname 192.168.5.33
+
+Host playground
+  Hostname 192.168.30.80
 
 Host archive
   Hostname 167.114.239.227
@@ -62,4 +65,8 @@ Host pfsense
   User admin
   Port 2222
   Hostname 192.168.5.1
+
+Match host *.gammadia.net
+  VerifyHostKeyDNS yes
+  StrictHostKeyChecking yes
 
