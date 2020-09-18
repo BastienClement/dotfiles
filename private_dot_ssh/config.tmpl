@@ -57,6 +57,11 @@ Host hedwig
   User {{ (index (lastpass "Hedwig") 0).note.username | trim }}
   Hostname {{ (index (lastpass "Hedwig") 0).note.hostname | trim }}
 
+Host torbjorn
+  User {{ (index (lastpass "Torbjorn") 0).note.username | trim }}
+  Hostname {{ (index (lastpass "Torbjorn") 0).note.hostname | trim }}
+  Port {{ (index (lastpass "Torbjorn") 0).note.password | trim }}
+
 Host infomaniak-gammadia
   User {{ (index (lastpass "Infomaniak Gammadia.ch") 0).note.username | trim }}
   Hostname {{ (index (lastpass "Infomaniak Gammadia.ch") 0).note.hostname | trim }}
