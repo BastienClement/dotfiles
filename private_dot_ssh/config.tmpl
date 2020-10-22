@@ -19,13 +19,13 @@ Host morkai
   Hostname morkai.gammadia.net
 
 Host michel
-  Hostname 145.239.245.163
+  Hostname {{ (index (lastpass "Michel") 0).note.hostname | trim }}
 
 Host jacquie
-  Hostname 145.239.245.162
+  Hostname {{ (index (lastpass "Jacquie") 0).note.hostname | trim }}
 
 Host karl
-  Hostname 37.187.30.103
+  Hostname {{ (index (lastpass "Karl") 0).note.hostname | trim }}
 
 Host pereblaise
   Hostname 192.168.30.10
