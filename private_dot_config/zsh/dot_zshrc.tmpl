@@ -143,6 +143,7 @@ devbox() {
 
 # zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
+compinit
 
 # tekton completion
 if which tkn >/dev/null; then source <(tkn completion zsh); fi
