@@ -119,6 +119,19 @@ apt() {
 }
 
 {{ end -}}
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
+dnf() {
+  if [[ $1 = 'up' ]]; then
+    (
+    set -e
+    sudo dnf upgrade
+    )
+  else
+    sudo dnf $@
+  fi
+}
+
+{{ end -}}
 {{ if eq .flavor "wsl" -}}
 alias explorer="/mnt/c/Windows/explorer.exe"
 alias wsl="/mnt/c/Windows/system32/wsl.exe"
