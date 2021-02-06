@@ -16,8 +16,9 @@ export PATH=$(
   awk '/\/Docker\/|VS Code/ { print; next } /\/mnt\/[a-z]/ { next } // { print }' |
   perl -pe 's/\n/:/ unless eof')
 {{ end -}}
-export PATH=$XDG_BIN_HOME:$XDG_DATA_HOME/go/bin:$PATH
-if [[ -d /usr/local/kubebuilder ]]; then export PATH=$PATH:/usr/local/kubebuilder/bin; fi
+if [[ -d $XDG_DATA_HOME/go/bin ]]; then export PATH=$XDG_DATA_HOME/go/bin:$PATH; fi
+if [[ -d $XDG_DATA_HOME/krew/bin ]]; then export PATH=$XDG_DATA_HOME/krew/bin:$PATH; fi
+export PATH=$XDG_BIN_HOME:$PATH
 
 # Remove duplicates in case env is loaded multiple times
 export PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
@@ -28,6 +29,9 @@ export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/legacy_credentials/bastie
 # go
 export GOPATH=$XDG_DATA_HOME/go
 export GO111MODULE=on
+
+# krew
+export KREW_ROOT="$XDG_DATA_HOME/krew"
 
 # vim
 export VIMINIT='let $XDGVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $XDGVIMRC'
