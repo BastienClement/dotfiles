@@ -101,7 +101,7 @@ export DISPLAY={{ index . "x11display" }}
 alias ll="ls -alh --color"
 alias d="docker"
 alias dr="docker run -it --rm"
-alias kr="kubectl run -i --tty --rm"
+alias kr="kubectl run -it --rm --restart=Never"
 alias kns="kubens"
 alias kctx="kubectx"
 alias gs="gsutil"
