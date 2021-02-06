@@ -22,7 +22,7 @@ if [[ $(pwd -P) =~ '^/mnt/c/Users/[^/]+$' ]]; then cd ~; fi
 
 {{ end -}}
 # Keychain
-if which keychain >/dev/null; then
+if which keychain &>/dev/null; then
   eval `keychain --eval --dir $XDG_RUNTIME_DIR --quiet id_rsa id_ed25519`
 fi
 
